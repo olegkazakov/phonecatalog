@@ -24,6 +24,9 @@ $ctrl->setPhoneService(new PhoneService(new MysqlPhoneDAO()));
 $layout = new Layout();
 if (isset($_SESSION['id'])) {
     $ctrl->setUserId($_SESSION['id']);
+    $layout->setLayoutName('userlayout');
+} else {
+    $layout->setLayoutName('default');
 }
 
 switch ($action) {
@@ -50,6 +53,7 @@ switch ($action) {
         setcookie(session_name(),'');
         $layout->setLayoutName('default');
         $ctrl->setUserId(NULL);
+        $_SESSION['id'] = NULL;
         $viewName = $ctrl->index();
         $layout->setView($ctrl->getView());
         $layout->render($viewName);
