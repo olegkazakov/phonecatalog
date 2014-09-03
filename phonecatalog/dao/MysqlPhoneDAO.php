@@ -10,15 +10,15 @@ class MysqlPhoneDAO implements PhoneDAO
       
     }
 
-    public function find()
+    public function find($id)
     {
 
     }
 
     public function findAll()
     {
-        $stmt = MysqlConnection::$dbh->prepare("SELECT id, fio as 'F.I.O.'"
-                . "phone, commit FROM phone");
+        $stmt = MysqlConnection::$dbh->prepare("SELECT id, fio, "
+                . "phone, comment FROM phone");
         $stmt->execute();
         $phones = [];
         while ($phone = $stmt->fetchObject('\phonecatalog\model\Phone')) {

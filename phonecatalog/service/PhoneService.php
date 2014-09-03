@@ -2,13 +2,13 @@
 namespace phonecatalog\service;
 
 use phonecatalog\model\Phone;
-use phonecatalog\dao\IncomeDAO;
+use phonecatalog\dao\PhoneDAO;
 
 class PhoneService
 {
     private $dao;
     
-    function __construct(IncomeDAO $dao)
+    function __construct(PhoneDAO $dao)
     {
         $this->dao = $dao;
     }

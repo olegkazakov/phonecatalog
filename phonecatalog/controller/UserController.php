@@ -6,8 +6,9 @@ use phonecatalog\service\UserServiceImpl;
 class UserController extends AbstractController
 {
     private $userService;
+    private $phoneService;
     private $view;
-
+    
     public function getView()
     {
         return $this->view;
@@ -37,6 +38,11 @@ class UserController extends AbstractController
     protected function getUserService()
     {
         return $this->userService;
+    }
+    
+    public function setPhoneService($phoneService)
+    {
+        $this->phoneService = $phoneService;
     }
 
     public function showUser()
@@ -79,6 +85,19 @@ class UserController extends AbstractController
         } else {
             return 'adduser';
         }
+    }
+    
+    public function getAllPhones()
+    {
+        $this->view->phones = [];
+        if (FALSE != ($this->view->phones = $this->phoneService->findAll())) {
+            return 'phones';          
+        } else {
+            $this->view->error = "Phones view error";
+            return 'index';
+        }
+                
+        
     }
     
     public function index()

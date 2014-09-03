@@ -7,8 +7,10 @@ require_once './config.php';
 use phonecatalog\controller\UserController;
 use phonecatalog\dao\MysqlConnection;
 use phonecatalog\dao\MysqlUserDAO;
+use phonecatalog\dao\MysqlPhoneDAO;
 use phonecatalog\layout\Layout;
 use phonecatalog\service\UserServiceImpl;
+use phonecatalog\service\PhoneService;
 
 MysqlConnection::$dbh = new PDO('mysql:host=' . Config::$dbhost . ';dbname='
         .Config::$dbname, Config::$dbuser, Config::$dbpass); 
@@ -18,6 +20,7 @@ if (empty($action)) {
     $action='index';
 }
 $ctrl = new UserController(new UserServiceImpl(new MysqlUserDAO()));
+$ctrl->setPhoneService(new PhoneService(new MysqlPhoneDAO()));
 $layout = new Layout();
 if (isset($_SESSION['id'])) {
     $ctrl->setUserId($_SESSION['id']);
@@ -63,9 +66,8 @@ switch ($action) {
         $layout->setView($ctrl->getView());
         $layout->render($viewName);
         break;
-    case "incomes" :
-        $ctrl->setRequestParam('month', filter_input(INPUT_POST, 'months'));
-        $viewName = $ctrl->incomes();
+    case "phones" :
+        $viewName = $ctrl->getAllPhones();
         $layout->setView($ctrl->getView());
         $layout->render($viewName);
         break;
