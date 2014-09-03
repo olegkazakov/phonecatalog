@@ -7,7 +7,10 @@ class MysqlPhoneDAO implements PhoneDAO
 {
     public function delete($id)
     {
-      
+        $stmt = MysqlConnection::$dbh->prepare("DELETE FROM phone "
+                . "WHERE id=:id");
+        $stmt->bindParam('id', $id);
+        return $stmt->execute();
     }
 
     public function find($id)

@@ -16,8 +16,10 @@
         <input type="submit" />
     </p>
 </form>
-<?php
-if (!empty($this->view->error)) {
-    echo "<div>{$this->view->error}</div>";
-} 
-?>
+<div>
+    <?php
+    if (!empty($this->view->error)) {
+        echo "<div>{$this->view->error}</div>";
+    } 
+    ?>
+</div>

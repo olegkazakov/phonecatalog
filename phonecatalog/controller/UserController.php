@@ -19,7 +19,7 @@ class UserController extends AbstractController
     {
         $this->view = $view;
     }
-    
+        
     public function getUserId()
     {
         return $this->userId;
@@ -92,14 +92,19 @@ class UserController extends AbstractController
     {
         $this->view->phones = [];
         if (FALSE != ($this->view->phones = $this->phoneService->findAll())) {
-            return 'phones';          
+            if (NULL!== $this->getUserId()) {
+                return 'extphones';     
+            } else {
+                return 'phones';
+            }
         } else {
             $this->view->error = "Phones view error";
             return 'index';
         }
     }
     
-    public function addPhone($add=true) {
+    public function addPhone($add=true)
+    {
         $phone = new Phone();
         if ($add) {
             $phone->setFio($this->getRequestParam('fio'));
@@ -112,6 +117,33 @@ class UserController extends AbstractController
             }
         }
         return 'addphone';
+    }
+    
+    public function deleteconfirm()
+    {
+        $id = $this->getRequestParam('id');
+        $_SESSION['DeletePhoneId'] = $id;
+        return 'deleteconfirm';
+    }
+    
+    public function deletephone()
+    {
+        if (NULL !== ($_POST['btnYes'])) {
+            $id=$_SESSION['DeletePhoneId'];
+            if ($this->phoneService->delete($id)) {
+                $this->view->error = "Phone deleted succesessfully!";
+            } else {
+                $this->view->error = "Phone delete error.";
+            }
+        } 
+        $_SESSION['DeletePhoneId']=NULL;
+        $this->view->phones = [];
+        if (FALSE != ($this->view->phones = $this->phoneService->findAll())) {
+            return 'extphones';     
+        } else {
+            $this->view->error = "Phones view error";
+            return 'index';
+        }
     }
     
     public function index()

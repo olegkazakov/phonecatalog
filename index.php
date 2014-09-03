@@ -75,6 +75,17 @@ switch ($action) {
         $layout->setView($ctrl->getView());
         $layout->render($viewName);
         break;
+    case "deleteconfirm":
+        $ctrl->setRequestParam('id', filter_input(INPUT_GET, 'id'));
+        $viewName = $ctrl->deleteconfirm();
+        $layout->setView($ctrl->getView());
+        $layout->render($viewName);
+        break;
+    case "deletephone":
+        $viewName = $ctrl->deletephone();
+        $layout->setView($ctrl->getView());
+        $layout->render($viewName);
+        break;
     case "index" :
         $viewName = $ctrl->index();
         $layout->setView($ctrl->getView());
