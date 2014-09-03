@@ -29,7 +29,14 @@ class MysqlPhoneDAO implements PhoneDAO
 
     public function save(Phone $phone)
     {
-
+        $stmt = MysqlConnection::$dbh->prepare("INSERT INTO phone "
+                . "(fio, phone, comment) "
+                . "values "
+                . "(:fio, :phone, :comment)");
+        $stmt->bindParam('fio', $phone->getFio());
+        $stmt->bindParam('phone', $phone->getPhone());
+        $stmt->bindParam('comment', $phone->getComment());
+        return $stmt->execute();
     }
 
     public function update(Phone $phone) 

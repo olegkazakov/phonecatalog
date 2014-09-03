@@ -58,14 +58,14 @@ switch ($action) {
         $layout->setView($ctrl->getView());
         $layout->render($viewName);
         break;
-    case "addIncome" :
+    case "addphone" :
         if (count($_POST) > 0) {
-            foreach (['amount', 'currency_id', 'date', 'source_id', 'user_id'] as $key) {
+            foreach (['fio', 'phone', 'comment'] as $key) {
                 $ctrl->setRequestParam($key, filter_input(INPUT_POST, $key));
             }
-            $viewName = $ctrl->addIncome();
+            $viewName = $ctrl->addPhone();
         } else {
-            $viewName = $ctrl->addIncome(false);
+            $viewName = $ctrl->addPhone(false);
         }
         $layout->setView($ctrl->getView());
         $layout->render($viewName);

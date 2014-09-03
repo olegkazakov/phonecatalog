@@ -2,6 +2,7 @@
 namespace phonecatalog\controller;
 
 use phonecatalog\service\UserServiceImpl;
+use phonecatalog\model\Phone;
 
 class UserController extends AbstractController
 {
@@ -96,8 +97,21 @@ class UserController extends AbstractController
             $this->view->error = "Phones view error";
             return 'index';
         }
-                
-        
+    }
+    
+    public function addPhone($add=true) {
+        $phone = new Phone();
+        if ($add) {
+            $phone->setFio($this->getRequestParam('fio'));
+            $phone->setPhone($this->getRequestParam('phone'));
+            $phone->setComment($this->getRequestParam('comment'));
+            if ($this->phoneService->save($phone)) {
+                $this->view->error = "Phone added succesessfully!";
+            } else {
+                $this->view->error = "Phone add error.";
+            }
+        }
+        return 'addphone';
     }
     
     public function index()
