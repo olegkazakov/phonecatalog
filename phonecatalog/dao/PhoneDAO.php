@@ -10,9 +10,9 @@ use phonecatalog\model\Phone;
 */
 interface PhoneDAO
 {
-    function save();
+    function save(Phone $phone);
     function findAll();
-    function find();
-    function delete();
-    function update();
+    function find($id);
+    function delete($id);
+    function update(Phone $phone);
 }

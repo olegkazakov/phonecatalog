@@ -1,9 +1,11 @@
 <?php
 namespace phonecatalog\dao;
 
+use phonecatalog\model\Phone;
+
 class MysqlPhoneDAO implements PhoneDAO
 {
-    public function delete()
+    public function delete($id)
     {
       
     }
@@ -25,14 +27,13 @@ class MysqlPhoneDAO implements PhoneDAO
         return $phones;
     }
 
-    public function save()
+    public function save(Phone $phone)
     {
 
     }
 
-    public function update() 
+    public function update(Phone $phone) 
     {
 
     }
-
 }
