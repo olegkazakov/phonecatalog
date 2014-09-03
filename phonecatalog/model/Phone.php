@@ -2,7 +2,7 @@
 namespace phonecatalog\model;
 
 /**
- * Description of Income
+ * Description of Phone
  *
  * @author olegkazakov
  */
