@@ -1,48 +1,111 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
 /* 
-    Created on : 15.08.2014, 17:17:15
+    Created on : 03.09.2014, 17:17:15
     Author     : olegkazakov
 */
-
+html, body, #container {
+	height:100%;	
+  margin:0;
+}
+html {
+	background:#fff;
+	color:#333;
+}
 body {
     font: 14pt Arial, Helvetica, sans-serif; /* Шрифт на веб-странице */
     background: #e3f3f7; /* Цвет фона */
 }
 h2 {
-    font-size: 1.1em; /* Размер шрифта */
-    color: #800040; /* Цвет текста */
+    font-size: 1.5 em; /* Размер шрифта */
+    color: #fff; /* Цвет текста */
     margin-top: 0; /* Отступ сверху */
+    padding-top: 10px;
+    margin-bottom: 10px;
 }
 #container {
-    width: 800px; /* Ширина слоя */
-    margin: 0 auto; /* Выравнивание по центру */
+    min-width:700px;
+    max-width:1000px; /* Ширина слоя */
+    margin: 0 20% 0 20%; /* Выравнивание по центру */
     background: #f0f0f0; /* Цвет фона левой колонки */
 }
-.header {
-    font-size: 2.2em; /* Размер текста */
+header {
     text-align: center; /* Выравнивание по центру */
-    padding: 5px; /* Отступы вокруг текста */
+    padding: 2px; /* Отступы вокруг текста */
     background: #8fa09b; /* Цвет фона шапки */
-    color: #ffe; /* Цвет текста */
+    color: #fff; /* Цвет текста */
+    min-height: 120px;
+    border-radius: 0 0 10px 10px;
 }
-.nav {
-    margin-top: 10px; 
-    width: 110px; /* Ширина слоя */
-    padding: 0 10px; /* Отступы вокруг текста */
-    float: left; /* Обтекание по правому краю */
+#main {
+	  min-height:100%;
+	  margin:0 0 -50px;
 }
+#all {  
+    padding:0 0 50px;
+}
+
 #content {
     margin-left: 130px; /* Отступ слева */
     padding: 10px; /* Поля вокруг текста */
     background: #fff; /* Цвет фона правой колонки */
 }
-.footer {
+footer {
     background: #8fa09b; /* Цвет фона подвала */
     color: #fff; /* Цвет текста */
-    padding: 10px; /* Отступы вокруг текста */
-    clear: left; /* Отменяем действие float */
+    height: 50px; /* Отступы вокруг текста */
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+}
+#copyright {
+    text-align:center;
+    font-size:1.1em;
+    padding:10px 0 0;
+} 
+menu {
+    list-style:none;
+    margin:0;
+    background: #ccf;
+    padding-left: 0;
+}
+menu ul {
+    background: #ccf;
+}
+menu li {
+    margin:5px 10px;
+    float:left; 
+}
+menu li a {
+    display:block;
+    padding:10px;
+    background:#ccf;
+    border-radius: 5px;
+}
+table { 
+    border: 4px double black;
+    background: #ccf; 
+    padding: 10px; 
+    margin: 0 auto 5%;
+    sellpadding:0; 
+    sellspacing:0; 
+    width:100%;
+    font-size:1em;
+    border-collapse: collapse;
+    text-align: center;
+}
+table td {
+    padding: 5px; /* Поля вокруг содержимого таблицы */
+    border: 1px solid black; /* Параметры рамки */
+}
+table caption {
+    margin:10px;
+}
+article {
+    margin: 23px auto 5px;
+    width: 90%;
+}
+h1 {
+    text-align: center;
+}
+form {
+    margin-top:10px;
+    padding-top: 13px;
 }

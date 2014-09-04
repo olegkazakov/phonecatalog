@@ -1,13 +1,13 @@
 <form action="index.php?action=login" method="POST" name="login">
     <fieldset>
-        <legend>Authorization</legend>
+        <legend>Авторизация</legend>
         <p>
-            <label>Login:
+            <label>Логин:
                 <input type="text" name="name" size="15" maxlength="15">
             </label>
         </p>
         <p>
-            <label>Password:  
+            <label>Пароль:  
                 <input type="password" name="password" size="25" maxlength="30">
             </label>
         </p>

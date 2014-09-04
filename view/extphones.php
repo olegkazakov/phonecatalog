@@ -1,6 +1,5 @@
 <div>
-    <table border="4px double black" background="#fc0" padding="10px" 
-           sellpadding="2" sellspacing="10" width="100%">
+    <table>
         <caption>Справочник телефонных номеров</caption>
         <thead>
             <tr>
@@ -8,8 +7,7 @@
                 <td>Ф.И.О.</td>
                 <td>Номер телефона</td>
                 <td>Комментарий</td>
-                <td>Изменить</td>
-                <td>Удалить</td>
+                <td>Опции</td>
             </tr>
         </thead>
         <tbody>
@@ -21,9 +19,11 @@
                     . "<td>{$phone->getPhone()}</td>"
                     . "<td>{$phone->getComment()}</td>"
                     . "<td><a href='?action=changeconfirm&id={$phone->getId()}'>"
-                    . "Изменить</a></td>"
-                    . "<td><a href='?action=deleteconfirm&id={$phone->getId()}'>"
-                    . "Удалить</a></td>"
+                    . "<img src='./img/edit.png' width='24' height='24' "
+                            . "alt='Изменить'></a> "
+                    . "<a href='?action=deleteconfirm&id={$phone->getId()}'>"
+                    . "<img src='./img/delete.png' width='24' height='24' "
+                            . "alt='Удалить'></a></td>"
                     . "</tr>";
                     $num++;
                 }

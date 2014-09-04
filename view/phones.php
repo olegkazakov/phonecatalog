@@ -1,5 +1,5 @@
 <div>
-    <table style="border: 4px double black; background: #fc0; padding: 10px; sellpadding:5; sellspacing:0; width:100%;">
+    <table>
         <caption>Справочник телефонных номеров</caption>
         <thead>
             <tr>
