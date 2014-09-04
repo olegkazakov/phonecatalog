@@ -9,30 +9,43 @@ class MysqlPhoneDAO implements PhoneDAO
     {
         $stmt = MysqlConnection::$dbh->prepare("DELETE FROM phone "
                 . "WHERE id=:id");
-        $stmt->bindParam('id', $id);
-        return $stmt->execute();
+        try {
+          $stmt->bindParam('id', $id);
+          return $stmt->execute();
+        } catch (PDOException $e) {
+            print $e->getMessage();
+        }
     }
 
     public function find($id)
     {
         $stmt = MysqlConnection::$dbh->prepare("SELECT id, fio, "
                 . "phone, comment FROM phone WHERE id=:id");
-        $stmt->bindParam('id', $id);
-        $stmt->execute();
-        $phone = $stmt->fetchObject('\phonecatalog\model\Phone');
-        return $phone;
+        try {        
+            $stmt->bindParam('id', $id);
+            $stmt->execute();
+            $phone = $stmt->fetchObject('\phonecatalog\model\Phone');
+            return $phone;
+        } catch (PDOException $e) {
+            print $e->getMessage();
+        }
     }
 
     public function findAll()
     {
         $stmt = MysqlConnection::$dbh->prepare("SELECT id, fio, "
                 . "phone, comment FROM phone");
-        $stmt->execute();
-        $phones = [];
-        while ($phone = $stmt->fetchObject('\phonecatalog\model\Phone')) {
-            $phones[] = $phone;
+        try {
+            $stmt->execute();
+            $phones = [];
+            while ($phone = $stmt->fetchObject('\phonecatalog\model\Phone')) {
+                $phones[] = $phone;
+            }
+            return $phones;
+        } catch (PDOException $e) {
+            print $e->getMessage();
         }
-        return $phones;
+        
     }
 
     public function save(Phone $phone)
@@ -44,10 +57,14 @@ class MysqlPhoneDAO implements PhoneDAO
         if ($phone->getFio()==''){
             $phone->setFio('no name');
         }
-        $stmt->bindParam('fio', $phone->getFio());
-        $stmt->bindParam('phone', $phone->getPhone());
-        $stmt->bindParam('comment', $phone->getComment());
-        return $stmt->execute();
+        try {
+            $stmt->bindParam('fio', $phone->getFio());
+            $stmt->bindParam('phone', $phone->getPhone());
+            $stmt->bindParam('comment', $phone->getComment());
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            print $e->getMessage();
+        }
     }
 
     public function update(Phone $phone) 
@@ -55,16 +72,14 @@ class MysqlPhoneDAO implements PhoneDAO
         $stmt = MysqlConnection::$dbh->prepare("UPDATE phone "
                 . "SET fio=:fio, phone=:phone, comment=:comment "
                 . "WHERE id=:id");
-        try 
-        {
+        try {
             $id = $phone->getId();
             $stmt->bindParam('id', $id);
             $stmt->bindParam('fio', $phone->getFio());
             $stmt->bindParam('phone', $phone->getPhone());
             $stmt->bindParam('comment', $phone->getComment());
             return $stmt->execute();
-        }
-        catch (PDOException $e) {
+        } catch (PDOException $e) {
             print $e->getMessage();
         }
     }
