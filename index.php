@@ -77,12 +77,30 @@ switch ($action) {
         break;
     case "deleteconfirm":
         $ctrl->setRequestParam('id', filter_input(INPUT_GET, 'id'));
-        $viewName = $ctrl->deleteconfirm();
+        $viewName = $ctrl->deleteConfirm();
         $layout->setView($ctrl->getView());
         $layout->render($viewName);
         break;
     case "deletephone":
-        $viewName = $ctrl->deletephone();
+        $viewName = $ctrl->deletePhone();
+        $layout->setView($ctrl->getView());
+        $layout->render($viewName);
+        break;
+    case "changeconfirm":
+        $ctrl->setRequestParam('id', filter_input(INPUT_GET, 'id'));
+        $viewName = $ctrl->changeConfirm();
+        $layout->setView($ctrl->getView());
+        $layout->render($viewName);
+        break;
+    case "changephone":
+        if (count($_POST) > 0) {
+            foreach (['fio', 'phone', 'comment'] as $key) {
+                $ctrl->setRequestParam($key, filter_input(INPUT_POST, $key));
+            }
+            $viewName = $ctrl->changePhone();
+        } else {
+            $viewName = $ctrl->changePhone(false);
+        }
         $layout->setView($ctrl->getView());
         $layout->render($viewName);
         break;

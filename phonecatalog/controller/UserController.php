@@ -119,14 +119,14 @@ class UserController extends AbstractController
         return 'addphone';
     }
     
-    public function deleteconfirm()
+    public function deleteConfirm()
     {
         $id = $this->getRequestParam('id');
         $_SESSION['DeletePhoneId'] = $id;
         return 'deleteconfirm';
     }
     
-    public function deletephone()
+    public function deletePhone()
     {
         if (NULL !== ($_POST['btnYes'])) {
             $id=$_SESSION['DeletePhoneId'];
@@ -143,6 +143,49 @@ class UserController extends AbstractController
         } else {
             $this->view->error = "Phones view error";
             return 'index';
+        }
+    }
+    
+    public function changeConfirm()
+    {
+        $id = $this->getRequestParam('id');
+        if (FALSE != ($this->view->phone = $this->phoneService->find($id))) {
+            $_SESSION['ChangePhoneId'] = $id;
+            return 'changeconfirm';     
+        } else {
+            $this->view->error = "Phones change error";
+            return 'extphones';
+        }
+    }
+    
+    public function changePhone($change=true)
+    {
+        if (NULL !== ($_POST['cbtnYes'])) {
+            if ($change) {
+                $phone = new Phone();
+                $phone->setId($_SESSION['ChangePhoneId']);
+                $phone->setFio($this->getRequestParam('fio'));
+                $phone->setPhone($this->getRequestParam('phone'));
+                $phone->setComment($this->getRequestParam('comment'));
+                if ($this->phoneService->update($phone)) {
+                    $this->view->error = "Phone changed succesessfully!";
+                } else {
+                    $this->view->error = "Phone change error.";
+                }
+            }
+            $id = $_SESSION['ChangePhoneId'];
+            $this->view->phone = $this->phoneService->find($id);
+            return 'changeconfirm'; 
+        } 
+        if (NULL !== ($_POST['cbtnNo'])) {
+            $_SESSION['ChangePhoneId'] = NULL;
+            $this->view->phones = [];
+            if (FALSE != ($this->view->phones = $this->phoneService->findAll())) {
+                return 'extphones';     
+            } else {
+                $this->view->error = "Phones view error";
+                return 'index';
+            }
         }
     }
     

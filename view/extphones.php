@@ -1,5 +1,6 @@
 <div>
-    <table border="4px double black" background="#fc0" padding="10px" sellpadding="2" sellspacing="10" width="100%">
+    <table border="4px double black" background="#fc0" padding="10px" 
+           sellpadding="2" sellspacing="10" width="100%">
         <caption>Справочник телефонных номеров</caption>
         <thead>
             <tr>
@@ -19,8 +20,10 @@
                     . "<td>{$phone->getFio()}</td>"
                     . "<td>{$phone->getPhone()}</td>"
                     . "<td>{$phone->getComment()}</td>"
-                    . "<td><a href=''>Изменить</a></td>"
-                    . "<td><a href='?action=deleteconfirm&id={$phone->getId()}'>Удалить</a></td>"
+                    . "<td><a href='?action=changeconfirm&id={$phone->getId()}'>"
+                    . "Изменить</a></td>"
+                    . "<td><a href='?action=deleteconfirm&id={$phone->getId()}'>"
+                    . "Удалить</a></td>"
                     . "</tr>";
                     $num++;
                 }

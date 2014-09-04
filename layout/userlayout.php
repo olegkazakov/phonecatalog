@@ -4,6 +4,8 @@
         <title>Телефонный справочник</title>
         <meta charset="utf-8" />
         <link href="./css/defaultlayout.css" rel="stylesheet">
+        <script src="./js/jquery-2.1.1.min.js" type="text/javascript"></script>
+        <script src="./js/jquery.maskedinput.js" type="text/javascript"></script>
     </head>
     <body>
         <div id="container">
