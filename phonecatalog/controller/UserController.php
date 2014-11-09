@@ -92,7 +92,7 @@ class UserController extends AbstractController
     {
         $this->view->phones = [];
         if (FALSE != ($this->view->phones = $this->phoneService->findAll())) {
-            if (NULL!== $this->getUserId()) {
+            if (isset($_SESSION['id'])) {
                 return 'extphones';     
             } else {
                 return 'phones';
